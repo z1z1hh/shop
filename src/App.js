@@ -78,15 +78,6 @@ function App() {
         <li>KIDS</li>
         <li>CULTURE</li>
       </div>
-      {/* <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand className="main-logo"></Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link onClick={() => { navigate('/') } }>Home</Nav.Link>
-            <Nav.Link onClick={() => { navigate('/detail') }}>Detail</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
       
       <Routes>
         <Route path="/" element={ <Main shoes={shoes} setShoes = {setShoes}/>} />
@@ -96,10 +87,7 @@ function App() {
           </Context1.Provider>
         } />
         <Route path="*" element={<div>없는 페이지</div> } />
-        <Route path="/about" element={ <About /> } >
-          <Route path="member" element={ <div>멤버</div> } />
-          <Route path="location" element={ <div>회사위치</div> } />
-        </Route>
+        
         <Route path="/event" element={ <Event/> } >
           <Route path="one" element={ <Eventone />} />
           <Route path="two" element={ <Eventtwo />} />
@@ -111,12 +99,5 @@ function App() {
   );
 }
 
-function About() {
-  return (
-    <div>회사 정보
-      <Outlet></Outlet>
-    </div>
-  )
-}
 
 export default App;
