@@ -37,6 +37,13 @@ let cart = createSlice({
       const idx = state.findIndex((a) => {return a.id === action.payload})
       state[idx].count++
     },
+    prdtDecrease(state, action) {
+      const idx = state.findIndex((a) => {return a.id === action.payload})
+      if(state[idx].count <= 0) {
+        return
+      }
+      state[idx].count--
+    },
     addCart(state, action) {
       const result = state.find(function(state){
         return state.id === action.payload.id
@@ -59,7 +66,7 @@ let cart = createSlice({
     }
   }
 })
-export let { prdtIncrease, addCart , deleteItem } = cart.actions
+export let { prdtIncrease, prdtDecrease, addCart , deleteItem } = cart.actions
 
 // 위에서 만든 변수를 여기에 등록해야 사용할 수 있음
 export default configureStore({

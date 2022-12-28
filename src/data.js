@@ -3,8 +3,7 @@ let data = [
           id : 0,
           title : "White and Black",
           content : "Born in France",
-          price : 120000,
-          a : 1
+          price : 120000
         },
       
         {

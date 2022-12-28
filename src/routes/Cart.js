@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { ageIncrease, prdtIncrease, deleteItem } from "./../store.js"
+import { prdtDecrease, prdtIncrease, deleteItem } from "./../store.js"
 
 function Cart() {
     // a에는 모든 state 값들이 들어온다, user라는 state만 뽑고싶으면 return state.user
@@ -11,14 +11,11 @@ function Cart() {
 
     return (
         <>
-            <h6>{user.user.name} {user.user.age}의 장바구니</h6>
-            <button onClick={() => dispatch(ageIncrease())}>버튼</button>
-
             <Table>
                 
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>상품코드</th>
                         <th>상품명</th>
                         <th>수량</th>
                         <th></th>
@@ -32,7 +29,11 @@ function Cart() {
                                     <td>{cartData[i].id}</td>
                                     <td>{cartData[i].name}</td>
                                     <td className="btn-count">
-                                        <button>-</button>{cartData[i].count}
+                                        <button onClick={
+                                            () => {
+                                                dispatch(prdtDecrease(cartData[i].id))
+                                            }
+                                        }>-</button>{cartData[i].count}
                                         <button onClick = {
                                             () => {
                                                 // 파라미터로 내가 클릭한 장바구니 데이터의 id로 전송
