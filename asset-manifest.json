@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/shop/static/css/main.1dcab36a.css",
+    "main.js": "/shop/static/js/main.295edd1e.js",
+    "static/js/787.23170c61.chunk.js": "/shop/static/js/787.23170c61.chunk.js",
+    "static/media/NanumSquareNeo-bRg.ttf": "/shop/static/media/NanumSquareNeo-bRg.dc621da24afcf6c33e03.ttf",
+    "static/media/NanumSquareNeo-eHv.ttf": "/shop/static/media/NanumSquareNeo-eHv.fbea4b3da8b8e421a165.ttf",
+    "static/media/img_main_logo.jpg": "/shop/static/media/img_main_logo.54ed7010aca9af7b240c.jpg",
+    "index.html": "/shop/index.html",
+    "main.1dcab36a.css.map": "/shop/static/css/main.1dcab36a.css.map",
+    "main.295edd1e.js.map": "/shop/static/js/main.295edd1e.js.map",
+    "787.23170c61.chunk.js.map": "/shop/static/js/787.23170c61.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1dcab36a.css",
+    "static/js/main.295edd1e.js"
+  ]
+}
