@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import SwiperBg from '../routes/SwiperBg'
+import FastMenu from './FastMenu'
 import axios from 'axios'
 
 function Main(props) {
@@ -48,7 +50,8 @@ function Main(props) {
 
     return (
         <>  
-            <div className="main-bg"></div>
+            <SwiperBg></SwiperBg>
+            <FastMenu></FastMenu>
                 {
                      moreBtnCnt <= 2 ? <button onClick={getShoesData}>더보기</button> : null
                 }

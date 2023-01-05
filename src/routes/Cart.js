@@ -1,18 +1,19 @@
 import Table from 'react-bootstrap/Table'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { prdtDecrease, prdtIncrease, deleteItem } from "./../store.js"
+
 
 function Cart() {
     // a에는 모든 state 값들이 들어온다, user라는 state만 뽑고싶으면 return state.user
     const cartData = useSelector((state)=>{ return state.cart }) // redux store 가져오는 함수
     const dispatch = useDispatch()  // useDispatch는 store.js로 요청을 보내주는 함수
     const user = useSelector((state) => {return state})
+    const [count, setCount] = useState(0)
 
     return (
         <>
             <Table>
-                
                 <thead>
                     <tr>
                         <th>상품코드</th>
@@ -54,6 +55,7 @@ function Cart() {
                     }
                 </tbody>
             </Table>
+            <button>결제하기</button>
         </>
         
     )
