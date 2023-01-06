@@ -7,28 +7,32 @@
       "name":"크랩&립 하우스",
       "price_large" : 34900,
       "price_medium" : 29000,
-      "intro":"#스노우 크랩&치즈의 눈꽃 축제와 립 스테이크의 불꽃 축제! #글로벌 축제의 맛이 하프앤하프로 만나다!"
+      "intro":"#스노우 크랩&치즈의 눈꽃 축제와 립 스테이크의 불꽃 축제! #글로벌 축제의 맛이 하프앤하프로 만나다!",
+      "image" : "https://cdn.dominos.co.kr/admin/upload/goods/20221215_SK9YopZX.jpg"
    },
    {
       "id" : 2,
       "type":"new",
       "name":"대만 콘 치즈 감자",
       "price_large" : 17900,
-      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #대만 야시장의 왕자 감자 치즈를 듬뿍 담은 피자"
+      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #대만 야시장의 왕자 감자 치즈를 듬뿍 담은 피자",
+      "image" : "https://cdn.dominos.co.kr/admin/upload/goods/20221117_h8989d1D.jpg"
    },
    {
       "id":3,
       "type":"new",
       "name":"터키 치킨 케밥",
       "price_large" : 17900,
-      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #터키(튀르키예)의 치킨 케밥의 이국적인 맛을 피자로 즐기다!"
+      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #터키(튀르키예)의 치킨 케밥의 이국적인 맛을 피자로 즐기다!",
+      "image" : "https://cdn.dominos.co.kr/admin/upload/goods/20221117_QJxK12Gk.jpg"
    },
    {
       "id":4,
       "type":"new",
       "name":"이탈리아 마르게리따",
       "price_large" : 17900,
-      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #이탈리아 전통의 맛! 피자 마르게리따!"
+      "intro":"#도미노 스트릿 피자! 마음까지 들뜨는 가격 #이탈리아 전통의 맛! 피자 마르게리따!",
+      "image" : "https://cdn.dominos.co.kr/admin/upload/goods/20221117_V7ZfEQKb.jpg"
    }
 ]
 }
