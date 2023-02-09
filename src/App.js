@@ -1,12 +1,12 @@
 import { createContext, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import data from './data.js'
 import Main from './routes/Main'
 import { Routes , Route , useNavigate } from 'react-router-dom'
 import Detail from './routes/Detail.js'
-import {Event,Eventone,Eventtwo} from './routes/Event.js'
 import Cart from './routes/Cart'
+import Menu from './routes/Menu'
+import Order from'./routes/Order'
 import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -26,7 +26,6 @@ function App() {
   const result = useQuery(['userName'], () => 
     axios.get('https://codingapple1.github.io/userdata.json')
     .then((a) =>{
-        console.log('요청 됨')
         return a.data;
     }),
     { staleTime : 2000 }
@@ -64,27 +63,22 @@ function App() {
       </div>
 
       <div className="subnavbar-wrap">
-        <li>메뉴</li>
-        <li>e-쿠폰</li>
-        <li>상품권 선물</li>
-        <li>이벤트, 제휴</li>
-        <li>매장검색</li>
-        <li>가맹점 모집</li>
+        <button onClick={() => {
+          navigate('/menu')
+        }}>메뉴</button>
+        <button>e-쿠폰</button>
+        <button>상품권 선물</button>
+        <button>이벤트, 제휴</button>
+        <button>매장검색</button>
+        <button>가맹점 모집</button>
       </div>
       
       <Routes>
-        <Route path="/" element={ <Main shoes={shoes} setShoes = {setShoes}/>} />
-        <Route path="/detail/:id" element={ 
-          <Context1.Provider value={{ stock }}>
-             <Detail shoes={shoes} />
-          </Context1.Provider>
-        } />
+        <Route path="/" element={ <Main />} />
+        <Route path="/detail/:id" element={ <Detail />} />
         <Route path="*" element={<div>없는 페이지</div> } />
-        
-        <Route path="/event" element={ <Event/> } >
-          <Route path="one" element={ <Eventone />} />
-          <Route path="two" element={ <Eventtwo />} />
-        </Route>
+        <Route path="/order" element={<Order />} />
+        <Route path="/menu" element={<Menu />}></Route>
         <Route path="/cart" element={<Cart />} />
       </Routes>
       

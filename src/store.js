@@ -1,5 +1,98 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
+// 피자 목록
+const data = createSlice({
+  name : 'data',
+  initialState : {
+    contents : []
+  },
+  reducers : {
+    getNewData(state, action) {
+      //return action.payload.content;
+      console.log(action);
+      state.contents = action.payload.content;
+
+      // 새로고침 하면 값이 날아가므로 세션에 저장 
+      sessionStorage.setItem('list', JSON.stringify(action.payload.content));
+    }
+  }
+})
+export const { getNewData } = data.actions
+
+// 도우 목록
+const dough = createSlice({
+  name : 'dough',
+  initialState : [
+    {id : 'super', name : '슈퍼시드 함유 도우', price : 2000},
+    {id : 'original', name : '오리지널 도우(트리플 치즈 버스트 엣지)', price : 5000},
+    {id : 'double_cheese', name : '오리지널 도우(더블 치즈 엣지)', price : 5000},
+    {id : 'basic', name : '오리지널 도우(기본)', price : 0},
+    {id : 'napoli_triple', name : '나폴리 도우(트리플 치즈 버스트 엣지)', price : 5000},
+    {id : 'napoli', name : '나폴리 도우', price : 0},
+    {id : 'thin', name : '씬 도우', price : 0}
+  ]
+});
+
+const storeList = createSlice({
+  name : 'storeList',
+  initialState : [
+    {id : '1', storeName : '명동점', storeAddress:'서울특별시 중구 마른내로 47' ,storeTelNo : '0222643081'},
+    {id : '2', storeName : '신당점', storeAddress:'서울특별시 중구 다산로 156', storeTelNo : '0222333082'},
+    {id : '3', storeName : '대학로점', storeAddress : '서울특별시 종로구 율곡로17길 7-38', storeTelNo : '0236753082'},
+    {id : '4', storeName : '세종로점', storeAddress : '서울특별시 종로구 필운대로 43', storeTelNo : '027233082'}
+  ],
+
+});
+
+const selectedStore = createSlice({
+  name : 'selectedStore', 
+  initialState : {
+    id : '', storeName : '', storeAddress :'', storeTelNo : ''
+  },
+  reducers : {
+    setStore(state,action) {
+      console.log(action.payload);
+      state = action.payload;
+    }
+  }
+});
+export const { setStore} = selectedStore.actions
+
+// 선택한 옵션 
+const option = createSlice({
+  name : 'option',
+  initialState : 
+    {
+      dough : '오리지널 도우(기본)',     // 도우종류
+      sidedish : '',  // 사이드메뉴
+      etc : '',       // 기타 & 음료
+      pizza: '',      // 피자
+      size : '',      // 사이즈
+      quantity : 1,   // 수량
+      charge : 0      // 가격(총 합계 = (피자*수량)+도우+사이드)
+    }
+  ,
+  reducers : {
+    setOption(state, action) {
+      console.log(action.payload)
+      return {...action.payload}
+    },
+    // 수량을 1씩 증가
+    increaseQuantity(state) {
+      state.quantity += 1;
+    },
+    // 수량을 1씩 감소
+    decreaseQuantity(state) {
+      if(state.quantity <= 0) {
+        alert('더이상 줄일 수 없습니다.')
+        return;
+      } 
+      state.quantity--;
+    }
+  }
+})
+export const { setOption, increaseQuantity ,decreaseQuantity } = option.actions
+
 let user = createSlice({
   name : 'user',
   initialState : {name : 'yeonji', age : 20},
@@ -73,6 +166,11 @@ export default configureStore({
   reducer: {
     user : user.reducer,
     stock : stock.reducer,
-    cart : cart.reducer
+    cart : cart.reducer,
+    data: data.reducer,
+    dough : dough.reducer,
+    option : option.reducer,
+    storeList : storeList.reducer,
+    selectedStore: selectedStore.reducer
   }
 }) 

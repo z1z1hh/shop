@@ -1,144 +1,179 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
-import Nav from 'react-bootstrap/Nav'
-import { Context1 } from './../App.js'
-import { addCart } from './../store'
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setOption } from '../store'
+import Order from '../routes/Order'
+import { NavbarBrand } from "react-bootstrap";
 
-function Detail(props) {
-    const {stock} = useContext(Context1)
-    const dispatch = useDispatch()
-    let [divShow , setDivShow] = useState(true)
+function Detail() {
+  const { id } = useParams() // 현재 url의 파라미터 정보
+
+  const localSavedId = sessionStorage.getItem('itemId')
+  const pizzaArr = JSON.parse(sessionStorage.getItem('list'))
+  const returnValue = pizzaArr.find(function (pizza) {
+    return pizza.id == localSavedId;
+  })
+
+  const dispatch = useDispatch();
+  
+  // 도우 리스트 가져오기
+  const doughList = useSelector((state) => { return state.dough });
+
+  // 선택한 옵션 리스트 (초기값)
+  const optionList = useSelector((state) => { return state.option });
+  
+  // 피자 사이즈별 금액 세팅용 state (초기값은 라지사이즈)
+  const [charge, setCharge] = useState(returnValue.price_large);
+
+  // 피자 총 금액(사이즈+도우+수량)
+  const [totalCharge, setTotalCharge] = useState(charge);
+
+  // 수량
+  const [quantity, setQuantity] = useState(1);
+
+  // 도우
+  const [dough, setDough] = useState('');
+
+  const navigate = useNavigate();
+
+  // 피자 사이즈 변경 시
+  const sizeChange = (e) => {
+    const pizzaCharge = e.target.value;
+    setCharge(pizzaCharge);
+  }
+
+  // 피자 사이즈 변경될 때 마다 하단 총 금액 변경되게
+  useEffect(() => {
+    setTotalCharge(charge*quantity);
+  }, [charge])
+
+  // 수량 변경될 때 마다 하단 총 금액 변경되게
+  useEffect(() => {
+    setTotalCharge( (Number(charge) + Number(dough)) *quantity)
+  }, [quantity])
+
+  // 도우 변경 시 (라디오버튼 선택 시)
+  const doughChange = (e) => {
     
-    useEffect(()=> {
-      setTimeout( () => {
-        setDivShow(false)    
-      }, 2000)
-    }, [])
-
-    let [count, setCount] = useState(0)
-    let [inputNumber , setInputNumber] = useState('')
-    let [isNumberYn, setIsNumberYn] = useState(false)
-    let [tabNo, setTabNo] = useState(0)
-
-    let {id} =  useParams() // 현재 url의 파라미터 정보
-
-    useEffect( () => {
-      if (isNaN(inputNumber)) {
-        setIsNumberYn(true)
-      } else {
-        setIsNumberYn(false)
-      }
-    }, [inputNumber])
-
-    const returnValue = props.shoes.find(function(data) {
-      return data.id == id
+    // 도우 리스트에서 내가 선택한 도우만 가져오기
+    const selectedDough = doughList.filter(({id}) => {
+      return e.target.id === id
     })
+    setDough(selectedDough[0].price);
+
+    // 총 가격은 피자의 가격과 선택한 도우의 가격을 합한 것
+    const totalPrice = (Number(charge) + Number(selectedDough[0].price)) * quantity;
     
-    const inputOnChange = (e) => {
-      const inputValue = e.target.value
-      setInputNumber(inputValue)
+    setTotalCharge(totalPrice)
+
+    const option = {
+      dough : selectedDough[0].name,    // 도우종류
+      charge : totalPrice,              // 가격
+      quantity : optionList.quantity    // 수량
     }
+    dispatch(setOption(option));
+  
+  }
 
-    return (
-      
-      <div className="container">
-          {
-            // divShow가 true면 Discount를 보여주고 false면 숨겨주기
-            divShow ? <Discount /> : null
-          }
+  return (
+    <>
 
-          {/* {count} */}
-          {/* <button onClick={ ()=> { 
-            setCount(count+1) 
-          }}> 버튼 </button> */}
-          <div className="row">
-            <div className="col-md-6">
-              <img src={'https://codingapple1.github.io/shop/shoes' + Number(returnValue.id+1)+ '.jpg'} 
-                    width="100%" />
+      <div className="detail_wrap">
+        <div>
+          <img src={returnValue.image} width="530px"></img>
+          <div className="txt_alarm">* 모든 사진은 이미지컷으로 실제 제품과 다를 수 있습니다.
+          <br/>* 원산지 정보는 사진 우측 하단 돋보기 메뉴를 통해 확인 가능합니다.
+          </div>
+        </div>
+
+        <div className="detail_txt_wrap">
+          <div className="detail_name">{returnValue.name}</div>
+          <div>{returnValue.intro}</div>
+
+          <p className="txt_title">사이즈 선택</p>
+
+          <div className="size_type_wrap" onChange={sizeChange}>
+            <div>
+              <input type="radio" id="large" name="size" value={returnValue.price_large} defaultChecked />
+              <label htmlFor="large">L {returnValue.price_large}</label>
             </div>
-          
-            <div className="col-md-6 align-left">
-              {/* {
-                isNumberYn ? <Alert /> : null
-              }
-              <input type="text" onChange={inputOnChange}></input> */}
-              <h4 className="pt-5 bold-font">{returnValue.title}</h4>
-              <p>{returnValue.content}</p>
-              <p className="bold-font">{returnValue.price}원</p>
-              <hr/>
-              <p className="bold-font">배송정보</p>
-              <div className = "transport-wrap">
-                <li>
-                  <span>배송비</span>
-                  <span>해당 브랜드 제품으로만 50000원 이상 구매시 무료배송 ( 미만시 배송비 3000원 발생 ) 제주도를 포함한 도서/산간 지역 추가 배송비 없음</span>
-                </li>
-                <li>
-                  <span>배송예정</span>
-                  <span>1일 이내 출고 (주말, 공휴일제외)</span>
-                </li>
-              </div>
-              <div className="doublebtn-wrap">
-                <button onClick={()=>{
-                  const addData = { id : returnValue.id, name : returnValue.title,  count : 1}
-                  dispatch(addCart(addData))
-                }}>장바구니 담기</button> 
-                <button>주문하기</button> 
-              </div>
-             
-            </div>
+            {
+              returnValue.price_medium !== undefined ?
+                <div>
+                  <input type="radio" id="medium" name="size" value={returnValue.price_medium}/>
+                  <label htmlFor="medium">M {returnValue.price_medium}</label>
+                </div> : null
+            }
           </div>
 
-          <Nav variant="tabs" defaultActiveKey="link0">
-            <Nav.Item>
-              <Nav.Link onClick={()=>{ setTabNo(0) }} eventKey="link0">상세정보</Nav.Link>
-            </Nav.Item>
+          <p className="txt_title">도우 선택</p>
+          <div className="radio_list">
+            {
+              doughList.map(function(a,i) {
+                return (
+                  <div key={i} onChange={doughChange}>
+                    {
+                      doughList[i].id === 'basic' ? <input type="radio" name="dow_list" id={`${doughList[i].id}`}  defaultChecked/> 
+                      : <input type="radio" name="dow_list" id={`${doughList[i].id}`} />
+                    }
 
-            <Nav.Item>
-              <Nav.Link onClick={()=>{ setTabNo(1) }} eventKey="link1">리뷰</Nav.Link>
-            </Nav.Item>
-      
-            <Nav.Item>
-              <Nav.Link onClick={()=>{ setTabNo(2) }} eventKey="link2">상품 Q&A</Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <TabContent shoes = {props.shoes} tabNo = {tabNo}/>
-        </div> 
-    )
-}
+                    <label htmlFor={`${doughList[i].id}`}>{doughList[i].name}</label>
+                    <div className="txt_charge">+{doughList[i].price}</div>
+                  </div>
+                )
+              })
+            }
+          </div>
 
-function TabContent({tabNo, shoes}) {
-  let [fade, setFade] = useState('')
+          <p className="txt_title">수량 선택</p>
+          <div className="quantity_wrap">
+              <button onClick={() =>{
+                if(quantity >= 1) {
+                  setQuantity(quantity-1)
+                }
+                //dispatch(decreaseQuantity())
+                //setTotalCharge(optionList.quantity * charge)
+              }}>-</button>
+              <div>{quantity}</div>
+              <button onClick={() => {
+                setQuantity(quantity+1)
+                //dispatch(increaseQuantity())
+                //setTotalCharge(optionList.quantity * charge)
+              }}>+</button>
+          </div>
+        </div>
+      </div>
 
-  useEffect(() => {
-    setTimeout(() => {
-      setFade('end')
-    }, 100)
-    
-    return () => {
-      setFade('')
-    }
-  }, [tabNo])
+      <div className="total_order_wrap">
+          <ul>
+            <li>피자</li>
+            <li>{returnValue.name}</li>
+            <li>도우/사이즈 : {optionList.dough}</li>
+          </ul>
+          <ul>
+            <li>사이드디시</li>
+            <li>없음</li>
+            <li></li>
+          </ul>
+          <ul>
+            <li>음료&기타</li>
+            <li>대만 콘치즈감자</li>
+            <li></li>
+          </ul>
+          <ul>
+            <li>총 금액</li>
+            <li>{totalCharge}</li>
+            <li>
+              <button onClick={() => {
+                navigate('/order')
+              }}>주문하기</button>
+            </li>
+          </ul>
+      </div>
+    </>
 
-  return (<div className={'start ' + fade}>
-    {
-      [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tabNo]
-    }
-  </div>)
-}
-
-function Discount() {
-  return (
-    <div className="alert alert-warning">
-      2초이내 구매시 할인
-    </div>
   )
 }
 
-function Alert() {
-  return (
-    <div className="alert-wrap">경고 : 숫자만 입력하세요</div>
-  )
-}
 
 export default Detail;
