@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/shop/static/css/main.1771ef81.css",
-    "main.js": "/shop/static/js/main.99a64e9f.js",
+    "main.css": "/shop/static/css/main.2f3a35cc.css",
+    "main.js": "/shop/static/js/main.bbc26fea.js",
     "static/js/787.23170c61.chunk.js": "/shop/static/js/787.23170c61.chunk.js",
     "static/media/NanumSquareNeo-bRg.ttf": "/shop/static/media/NanumSquareNeo-bRg.dc621da24afcf6c33e03.ttf",
     "static/media/NanumSquareNeo-eHv.ttf": "/shop/static/media/NanumSquareNeo-eHv.fbea4b3da8b8e421a165.ttf",
     "static/media/img_main_logo.jpg": "/shop/static/media/img_main_logo.54ed7010aca9af7b240c.jpg",
+    "static/media/img_location.png": "/shop/static/media/img_location.3ff91d74c0193b780e4b.png",
     "index.html": "/shop/index.html",
-    "main.1771ef81.css.map": "/shop/static/css/main.1771ef81.css.map",
-    "main.99a64e9f.js.map": "/shop/static/js/main.99a64e9f.js.map",
+    "main.2f3a35cc.css.map": "/shop/static/css/main.2f3a35cc.css.map",
+    "main.bbc26fea.js.map": "/shop/static/js/main.bbc26fea.js.map",
     "787.23170c61.chunk.js.map": "/shop/static/js/787.23170c61.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1771ef81.css",
-    "static/js/main.99a64e9f.js"
+    "static/css/main.2f3a35cc.css",
+    "static/js/main.bbc26fea.js"
   ]
 }
