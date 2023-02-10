@@ -13,7 +13,7 @@ const Map = () => {
         const center = new kakao.maps.LatLng(37.570533, 126.992156); // 지도의 중심좌표
         const options = {
             center,
-            level: 3,
+            level: 3
         };
         const map = new kakao.maps.Map(container.current, options);
 
