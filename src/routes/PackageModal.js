@@ -16,7 +16,7 @@ const useModal = () => {
     const storeList = useSelector((state)=>{ return state.storeList }) // redux store 가져오는 함수
     const dispatch = useDispatch();
 
-    const Modal = () =>  
+    const Modal = (props) =>  
     (
         <>
             {isOpen && (
@@ -38,6 +38,7 @@ const useModal = () => {
                                                 <div>{storeList[i].storeAddress}</div>
                                                 <button onClick={() => {
                                                     sessionStorage.setItem('selectedStore', JSON.stringify(storeList[i]))
+                                                    props.setStore(JSON.stringify(storeList[i]))
                                                     setIsOpen(false)
                                                 }}>선택</button>
                                             </li>

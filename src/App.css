@@ -276,6 +276,19 @@ hr {
 .modal-list > li > div {margin: 8px 0 8px 0; color:rgb(136,136,136); }
 .modal-list > li > button {border:none; color:white; background-color: black; padding: 7px;}
 .modal-list > li > span:nth-child(2) {margin-left: 10px; font-size: 13px;}
+.package_store_contents {border-bottom:1px solid black; padding:30px 60px 30px 60px; text-align: left;}
+.package_store_contents > div {display: flex; align-items: center;}
+.package_store_contents > div:nth-child(2) {margin-top: 10px; color:rgb(171,172,171);}
+.package_store_contents > div > input[type="radio"] {width: 30px; height: 20px; margin:0;}
+.package_store_contents > div:nth-child(1) > span:nth-child(3) { margin-left: 12px; font-size: 13px;}
+.package_store_contents > div:nth-child(2) > .img_location {margin-left:26px; background-image: url(./img/img_location.png); background-size: 20px; width: 20px; height: 20px; background-position:center ; background-repeat: no-repeat;}
+.package_store_contents > div:nth-child(3)  {margin-left:30px; margin-top: 10px;}
+.package_store_contents > div:nth-child(3) > span {border-radius: 15px;
+background-color: rgb(245,245,245); font-size: 12px;
+padding: 10px;}
+.package_order_wrap {padding: 40px; display: flex; justify-content: flex-end; align-items: center; }
+.package_order_wrap > div {margin-right: 20px; display: inline;}
+.package_order_wrap > button {width:150px; padding: 16px; border:none; background-color: red; color:white;}
 .App {
   text-align: center;
 }

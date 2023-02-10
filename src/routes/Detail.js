@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setOption } from '../store'
+import { setOption, addOrder } from '../store'
 import Order from '../routes/Order'
 import { NavbarBrand } from "react-bootstrap";
 
@@ -65,14 +65,6 @@ function Detail() {
     const totalPrice = (Number(charge) + Number(selectedDough[0].price)) * quantity;
     
     setTotalCharge(totalPrice)
-
-    const option = {
-      dough : selectedDough[0].name,    // 도우종류
-      charge : totalPrice,              // 가격
-      quantity : optionList.quantity    // 수량
-    }
-    dispatch(setOption(option));
-  
   }
 
   return (
@@ -165,6 +157,16 @@ function Detail() {
             <li>{totalCharge}</li>
             <li>
               <button onClick={() => {
+                const orderData = {
+                  imgUrl : returnValue.image,
+                  pizza : returnValue.name,
+                  dough : optionList.dough,
+                  dough_price : dough,
+                  quantity : quantity,
+                  total_price : totalCharge
+                }
+                alert(JSON.stringify(orderData))
+                dispatch(addOrder(JSON.stringify(orderData)));
                 navigate('/order')
               }}>주문하기</button>
             </li>

@@ -93,6 +93,25 @@ const option = createSlice({
 })
 export const { setOption, increaseQuantity ,decreaseQuantity } = option.actions
 
+const order = createSlice({
+  name : 'order',
+  initialState : {
+    imgUrl : '',
+    pizza : '',
+    dough : '',
+    dough_price : 0,
+    quantity : 0,
+    total_price : 0
+  },
+  reducers : {
+    addOrder(state,action) {
+      console.log(action.payload)
+      state = action.payload;
+    }
+  }
+})
+export let {addOrder} = order.actions
+
 let user = createSlice({
   name : 'user',
   initialState : {name : 'yeonji', age : 20},
@@ -171,6 +190,7 @@ export default configureStore({
     dough : dough.reducer,
     option : option.reducer,
     storeList : storeList.reducer,
-    selectedStore: selectedStore.reducer
+    selectedStore: selectedStore.reducer,
+    order : order.reducer
   }
 }) 
