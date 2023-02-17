@@ -7,6 +7,7 @@ import Detail from './routes/Detail.js'
 import Cart from './routes/Cart'
 import Menu from './routes/Menu'
 import Order from'./routes/Order'
+import Login from './routes/Login'
 import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -23,14 +24,6 @@ function App() {
   // 페이지 이동
   let navigate = useNavigate()
 
-  const result = useQuery(['userName'], () => 
-    axios.get('https://codingapple1.github.io/userdata.json')
-    .then((a) =>{
-        return a.data;
-    }),
-    { staleTime : 2000 }
-  );
-
   return (
     <div className="App">
       <div className="navbar-wrap">
@@ -40,24 +33,25 @@ function App() {
         <div className="submenu-wrap">
          
           <li>
-            로그인
+            <button onClick={ () => 
+              {
+                navigate('/login')
+              } }>로그인</button>
           </li>
           <li>
-            <span>회원가입</span>
+            <button>회원가입</button>
           </li>
           <li>
             <span></span>
-            <span onClick={()=>{
+            <button onClick={()=>{
                navigate('/cart')
             }}>장바구니
-              {
-                cartDataLength >= 1 ? <span className="bag-count">{cartDataLength}</span> : null
-              }
-            </span>
+             
+            </button>
              
           </li>
           <li>
-            <span>{ result.isLoading ? '로딩 중입니다.' : result.data.name + '님'}</span>
+            {/* <span>{ result.isLoading ? '로딩 중입니다.' : result.data.name + '님'}</span> */}
           </li>
         </div>
       </div>
@@ -80,6 +74,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       
     </div>

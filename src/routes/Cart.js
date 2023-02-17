@@ -1,8 +1,5 @@
-import Table from 'react-bootstrap/Table'
 import { useDispatch, useSelector } from 'react-redux'
 import { memo, useState } from 'react'
-import { prdtDecrease, prdtIncrease, deleteItem } from "./../store.js"
-
 
 function Cart() {
     // a에는 모든 state 값들이 들어온다, user라는 state만 뽑고싶으면 return state.user
@@ -12,51 +9,32 @@ function Cart() {
     const [count, setCount] = useState(0)
 
     return (
-        <>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>상품코드</th>
-                        <th>상품명</th>
-                        <th>수량</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        cartData.map(function(a, i) {
-                            return (
-                                <tr className="data-list" key = {i}>
-                                    <td>{cartData[i].id}</td>
-                                    <td>{cartData[i].name}</td>
-                                    <td className="btn-count">
-                                        <button onClick={
-                                            () => {
-                                                dispatch(prdtDecrease(cartData[i].id))
-                                            }
-                                        }>-</button>{cartData[i].count}
-                                        <button onClick = {
-                                            () => {
-                                                // 파라미터로 내가 클릭한 장바구니 데이터의 id로 전송
-                                                dispatch(prdtIncrease(cartData[i].id))
-                                            }
-                                        }>+</button>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => {
-                                           dispatch(deleteItem(cartData[i].id))
-                                        }}>
-                                            <img className="btn-delete" src={require('../img/btn_delete.png')}></img>
-                                        </button>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </Table>
-            <button>결제하기</button>
-        </>
+        <div className="order_contents">
+            <div className="order_txt">주문방법 선택</div>
+            <div className="order_type_wrap">
+                <div className="order_type">
+                    <input type="radio" id="deliveryOrder" name="orderType" defaultChecked />
+                    <label htmlFor="deliveryOrder" 
+                            onClick={()=>{
+                                // setTabType(0)
+                            }}>배달주문</label>
+                </div>
+                
+                <div className="order_type">
+                    <input type="radio" id="packageOrder" name="orderType" />
+                    <label htmlFor="packageOrder"
+                            onClick={() => {
+                                // setTabType(1)
+                            }}>포장주문</label>
+                </div>
+                
+            </div>
+           
+            {/* {
+                tabType === 0 ?  <DeliveryOrder DelieveryModal = {DelieveryModal} openDeModal = {openDeModal}></DeliveryOrder> 
+                                : <PackageOrder PackageModal = {PackageModal} openModal = {openModal} selectedStore = {selectedStore} ></PackageOrder>
+            } */}
+        </div>
         
     )
 }

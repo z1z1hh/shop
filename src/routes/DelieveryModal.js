@@ -12,6 +12,23 @@ const useDelieveryModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const openDeModal = () => setIsOpen(true);
     const closeDeModal = () => setIsOpen(false);
+    const [address, setAddress] = useState(''); // 주소
+    const [addressDetail, setAddressDetail] = useState(''); // 상세주소
+
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = '';
+        if (data.addressType === 'R') {
+            if (data.bname !== '') {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== '') {
+                extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+            }
+            fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+        }
+        //fullAddress -> 전체 주소반환
+    }
 
     const Modal = () =>  
     (
@@ -20,7 +37,8 @@ const useDelieveryModal = () => {
                 <>
                     <div className="modal-background"></div>
                     <div className="modal-contents">
-                        <DaumPostcode />
+                        <DaumPostcode autoClose onComplete={handleComplete} />
+                        <button>닫기</button>
                     </div>
                 </>
             )}

@@ -7,16 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store.js'
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { CookiesProvider } from 'react-cookie';
+import axios from 'axios';
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-         <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <App />
-        </BrowserRouter>
-      </Provider>
+       <CookiesProvider>
+        <Provider store={store}>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </CookiesProvider>
     </QueryClientProvider>
 );
 
