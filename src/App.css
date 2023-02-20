@@ -272,7 +272,7 @@ hr {
 }
 .modal-detail {height:626px; display: grid; grid-template-columns: 40% 60%;}
 .modal-title {font-size:20px; padding: 26px; display: flex; align-items: center; }
-.modal-title .btn-close {margin-left:auto; border:none; background-color:white; background-position:center; width:22px; height:22px; background-size:22px; background-image: url(./img/btn-close.png);}
+.modal-title .btn-close {margin-left:auto; border:none; background-color:white; background-position:center; width:22px; height:22px; background-size:22px; background-image: url(./img/btn_close.png);}
 .modal-list > li {font-size:15px; padding:20px 20px 20px 26px; border-top:1px solid rgb(221,221,221); text-align: left;}
 .modal-list > li:nth-last-child(1) {border-bottom: 1px solid rgb(221,221,221);}
 .modal-list > li > div {margin: 8px 0 8px 0; color:rgb(136,136,136); }

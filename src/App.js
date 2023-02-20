@@ -1,6 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 import './App.css';
-import data from './data.js'
 import Main from './routes/Main'
 import { Routes , Route , useNavigate } from 'react-router-dom'
 import Detail from './routes/Detail.js'
@@ -8,19 +7,13 @@ import Cart from './routes/Cart'
 import Menu from './routes/Menu'
 import Order from'./routes/Order'
 import Login from './routes/Login'
+import Admin from './routes/Admin'
 import { useSelector } from 'react-redux'
-import axios from 'axios';
-import { useQuery } from 'react-query';
+
 
 export let Context1 = createContext() // 컨텍스트 = state 보관함
 
 function App() {
-  // 상품 데이터
-  let [shoes, setShoes] = useState(data)
-  let [stock] = useState([10,11,12])
-  const cartData = useSelector((state)=>{ return state.cart }) // redux store 가져오는 함수
-  const [cartDataLength] = useState(cartData.length)
-
   // 페이지 이동
   let navigate = useNavigate()
 
@@ -51,8 +44,14 @@ function App() {
              
           </li>
           <li>
-            {/* <span>{ result.isLoading ? '로딩 중입니다.' : result.data.name + '님'}</span> */}
+            <button onClick={()=>{
+               navigate('/admin')
+            }}>메뉴추가
+             
+            </button>
+             
           </li>
+      
         </div>
       </div>
 
@@ -75,6 +74,7 @@ function App() {
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       
     </div>
